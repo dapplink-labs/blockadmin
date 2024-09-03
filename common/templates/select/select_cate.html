@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<div class="input-group">
+  <div class="input-group-addon">
+      <span class="fa fa-exchange"></span>
+      <span>机构类型</span>
+  </div>
+  <select style="width:100px" name="cate" data-bixin-select="true" class="form-control">
+    {% if cate == 'all' %}
+        <option value="all" selected>全部</option>
+    {% else %}
+        <option value="all">全部</option>
+    {% endif %}
+    {% for cate_item in cate_list %}
+        {% if cate_item == cate %}
+            <option value="{{ cate_item }}" selected>{{ cate_item }}</option>
+        {% else %}
+            <option value="{{ cate_item }}">{{ cate_item }}</option>
+        {% endif %}
+    {% endfor %}
+  </select>
+</div>

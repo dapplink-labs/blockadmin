@@ -1,0 +1,200 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  ba_tags%}
+{% block bixin_head_title %}
+{% endblock %}
+{% block panelHeader %}
+<h3>标签查找修改</h3>
+{% endblock %}
+{% block filter %}
+    <form encType="multipart/form-data" action="get_group_tag_by_addr" class="form-inline d-flex flex-row justify-content-start align-items-end" method="get">
+        <div class="form-group">
+            <label class="sr-only control-label"></label>
+            {% include 'select/select_address.html' %}
+        </div>
+        <button type="submit" class="btn btn-default">查询</button>
+        <div style="text-align: center; margin-left:35px; margin-bottom:6px; font-size: 16px">
+           <p> {{ msg }} </p>
+        </div>
+    </form>
+{% endblock %}
+{% block content %}
+<div class="dataTables_wrapper form-inline no-footer">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered dataTable no-footer" role="grid">
+          <thead>
+            <tr role="row">
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">gaddrid</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">地址数量</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">address</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">cate</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">tag</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr role="row">
+              <td>
+                  {{ gaddrid }}
+              </td>
+              <td>
+                  {{ addrs }}
+              </td>
+              <td>
+                  {{ address }}
+              </td>
+              <td>
+                 <table class="table table-striped table-bordered dataTable no-footer" style="border:0">
+                     <tbody>
+                        {% for tag in tag_list %}
+                          <tr role="row">
+                             <td style="border:0; margin:0">{{ tag.tagname }}</td>
+                          </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+              </td>
+              <td>
+                  <select name="cate" class="form-control form-display">
+                      {% for ex_type in ex_type_list %}
+                          {% if ex_type == cate %}
+                             <option selected>{{ ex_type }}</option>
+                          {% else %}
+                             <option>{{ ex_type }}</option>
+                          {% endif %}
+                      {% endfor %}
+                  </select>
+              </td>
+              <td>
+                 <button style="margin-left:6px" class="form-control form-display" onclick="CreateTag(this)">新增</button>
+                 <button style="margin-left:6px" class="form-control form-display" onclick="DeleteTag(this)">删除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <input type="hidden" id="data-ret" value="{{ ret_tag_list }}">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+function CreateTag(obj){
+    var gaddrid = "{{ gaddrid }}";
+    var address = "{{ address }}";
+    var url = window.location.origin + '/rcreate_tag'
+    var html = ""
+        html += `
+        <div class="modal fade" tabIndex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form encType="multipart/form-data" method="get" action="${url}">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="CancleDiglog">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="gridSystemModalLabel">
+                                <div>
+                                    <span>新增加标签</span>
+                                </div>
+                             </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                 <div class="col-12">
+                                    <div id="risk-param-form">
+                                        <div class="form-group">
+                                            <i>分组信息</i> :
+                                            <input style="width:300px; height:30px; margin-left:30px;" type="text" name="group" value="${gaddrid}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <i style="width:300px">地址信息</i> : <input style="width:300px;height:30px;margin-left:30px;" type="text" name="address" value="${address}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <i style="width:300px">输入标签</i> : <input style="width:300px; height:30px;margin-left:30px;" type="text" name="tag"/>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>`;
+    var $modal = $(html);
+    var $body = $('body');
+    $body.append($modal);
+    $modal.modal();
+    $modal.on('hidden.bs.modal', function (e) {
+        $modal.remove();
+    });
+}
+
+function DeleteTag(obj){
+    var gaddrid = "{{ gaddrid }}";
+    var address = "{{ address }}";
+    var ret_tag_list = JSON.parse($("#data-ret").val().replaceAll("\'", "\"").replaceAll("None", "0"))
+    var url = window.location.origin + '/rdelete_tag'
+    var html = ""
+        html += `
+        <div class="modal fade" tabIndex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form encType="multipart/form-data" method="get" action="${url}" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="CancleDiglog">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="gridSystemModalLabel">
+                                <div>
+                                    <span>删除标签</span>
+                                </div>
+                             </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                 <div class="col-12">
+                                    <div id="risk-param-form">
+                                        <div class="form-group">
+                                            <i>分组的信息</i> : <input style="width:300px; height:30px; margin-left:30px;" type="text" name="group" value="${gaddrid}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <i style="width:300px">地址的信息</i> : <input style="width:300px;height:30px;margin-left:30px;" type="text" name="address" value="${address}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <i style="width:300px">删除的标签</i> :
+                                            <select name="tag" style="width:300px; height:30px;margin-left:30px;">`
+                                                 for(var i=0; i < ret_tag_list.length; i++) {
+                                                     html +=
+                                                     `<option>${ret_tag_list[i].tagname}</option>`
+                                                 }
+                                           html +=
+                                          `</select>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>`;
+    var $modal = $(html);
+    var $body = $('body');
+    $body.append($modal);
+    $modal.modal();
+    $modal.on('hidden.bs.modal', function (e) {
+        $modal.remove();
+    });
+}
+</script>
+{% endblock %}
+
+

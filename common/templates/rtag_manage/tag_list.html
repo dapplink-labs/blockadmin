@@ -1,0 +1,52 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  ba_tags%}
+{% block bixin_head_title %}
+{% endblock %}
+{% block panelHeader %}
+<h3>远程标签管理</h3>
+{% endblock %}
+{% block filter %}
+
+{% endblock %}
+{% block content %}
+<div class="dataTables_wrapper form-inline no-footer">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered dataTable no-footer" role="grid">
+          <thead>
+            <tr role="row">
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标签ID</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标签</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">类别</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for item in tag_data_list %}
+            <tr role="row">
+              <td>{{ item.tagid }}</td>
+              <td>{{ item.tag  }}</td>
+              <td>{{ item.cate  }}</td>
+              <td>
+                  <a href="{% url 'get_addrs_by_tagid' %}?asset=BTC&tag_id={{ item.id }}">查看组地址</a>
+                  <a href="{% url 'delete_group_tag' %}?asset=BTC&tag_id={{ item.tagid }}&up_down={{ up_down }}&page={{ page }}&page_size={{ page_size }}">删除</a>
+                  <a href="{% url 'update_group_tag' item.tagid %}">修改</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="pull-right">
+      <a href="{% url 'rget_tags' %}">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="{% url 'rget_tags' %}?asset={{ asset }}&up_down=prev&page={{ page }}&page_size={{ page_size }}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="{% url 'rget_tags' %}?asset={{ asset }}&up_down=next&page={{ page }}&page_size={{ page_size }}">下一页</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

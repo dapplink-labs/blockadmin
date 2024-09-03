@@ -1,0 +1,6 @@
+{% load staticfiles %}
+<div class="input-group">
+  <div class="input-group-addon"><span class="fa fa-btc"></span><span>实体名称:</span>
+  </div>
+  <input type="text" style="width:300px" name="name" class="form-control" value="{{ name | default:'' }}" >
+</div>

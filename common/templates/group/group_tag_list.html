@@ -1,0 +1,58 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  ba_tags%}
+{% block bixin_head_title %}
+{% endblock %}
+{% block panelHeader %}
+<h3>BTC组标签列表</h3>
+{% endblock %}
+{% block filter %}
+ <form encType="multipart/form-data" class="form-inline d-flex flex-row justify-content-start align-items-end" method="get">
+    <div class="form-group">
+        <label class="sr-only control-label"></label>
+        {% include 'select/select_tag.html' %}
+        {% include 'select/select_cate.html' %}
+    </div>
+    <button type="submit" class="btn btn-default">查询</button>
+</form>
+{% endblock %}
+{% block content %}
+<div class="dataTables_wrapper form-inline no-footer">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered dataTable no-footer" role="grid">
+          <thead>
+            <tr role="row">
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">ID</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标签</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">机构类型</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">实体名称</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">创建时间</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for item in group_tag_list %}
+            <tr role="row">
+              <td>{{ item.id }}</td>
+              <td>{{ item.g_tag }}</td>
+              <td>{{ item.g_cate }}</td>
+              <td>{{ item.entity }}</td>
+              <td>{{ item.created_at | hdatetime }}</td>
+              <td>
+                  <a href="{% url 'edit_group_tag' %}?tag_id={{ item.id  }}&page={{ page }}">修改</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="pull-right">
+      {% include 'select/pagination.html' with items=group_tag_list %}
+    </div>
+  </div>
+</div>
+{% endblock %}

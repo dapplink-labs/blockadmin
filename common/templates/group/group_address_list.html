@@ -1,0 +1,58 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  ba_tags%}
+{% block bixin_head_title %}
+{% endblock %}
+{% block panelHeader %}
+<h3>标签组地址信息</h3>
+{% endblock %}
+{% block filter %}
+{% endblock %}
+{% block content %}
+<div class="dataTables_wrapper form-inline no-footer">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered dataTable no-footer" role="grid">
+          <thead>
+            <tr role="row">
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">ID</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标签</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">资产名称</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">地址</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">审核</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">创建时间</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for item in address_list %}
+            <tr role="row">
+              <td>{{ item.id }}</td>
+              <td>{{ item.tag.tag }}</td>
+              <td>{{ item.asset }}</td>
+              <td>{{ item.address }}</td>
+              <td>{{ item.is_checked | is_real_addr}}</td>
+              <td>{{ item.created_at | hdatetime }}</td>
+              <td>
+                  <a href="{% url 'upd_tag_address' item.id %}?page={{ page }}">修改</a>
+                  <a href="{% url 'delete_tag_address'  item.id %}?page={{ page }}">删除</a>
+                  {% if item.is_checked == 'uncheck' or item.is_checked == 'checking' %}
+                      <a href="#">通过</a>
+                  {% elif item.is_checked == 'checked' %}
+                      <a href="#">驳回</a>
+                  {% endif %}
+                </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="pull-right">
+      {% include 'select/pagination.html' with items=tag_address_list %}
+    </div>
+  </div>
+</div>
+{% endblock %}

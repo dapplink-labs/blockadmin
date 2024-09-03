@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<html data-static_url={{ config.STATIC_URL }}>
+<head>
+    <title>区块天眼数据后台</title>
+    <meta charSet="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Contro" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="renderer" content="webkit" />
+    <style>
+        .error-div {
+	        margin-top:50px;
+            margin-left:20px;		    
+	        display:inline-block;
+            font-size:16px;
+            height: 240px;
+	        line-height:60px;
+        }
+
+	    .error-div div {
+	        text-align:center;
+	    }
+
+    </style>
+</head>
+<body>
+    <div class="error-div">
+	    <div><img src="{% static 'images/error.svg' %}"></div>
+	    <div><span>{{ error_msg }}</span></div>
+        <div><span id="time-out"> 3 </span> 秒后自动跳转，请等待</div>
+    </div>
+</body>
+
+    <script>
+        let time_sed = 3;
+        let time_span = document.getElementById("time-out");
+        let url_href = window.location.href;
+        let index = url_href.lastIndexOf("\/");
+        let url_str = url_href.substring(0, index + 1);
+        let req_url = url_str + "{{ href_url }}";
+        function error_time_out() {
+            time_sed--;
+            time_span.innerHTML = time_sed;
+            if(time_sed <= 0) {
+                location.href =  req_url;
+                clearInterval(interval);
+            }
+        }
+        let interval = setInterval("error_time_out()", 1000);
+    </script>
+</html>

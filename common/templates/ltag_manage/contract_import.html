@@ -1,0 +1,16 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  ba_tags%}
+{% block bixin_head_title %}
+{% endblock %}
+{% block panelHeader %}
+<h3>文件方式导入</h3>
+{% endblock %}
+{% block filter %}
+{% endblock %}
+{% block content %}
+    <form class="input-group" action="" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <input type="file" name="excel" style="float:left; display:inline">
+        <input type="submit" value="上传" style="float:left; display:inline">
+    </form>
+{% endblock %}

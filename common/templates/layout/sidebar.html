@@ -1,0 +1,91 @@
+{% load staticfiles%}
+<div class="left_col scroll-view">
+  <div class="navbar nav_title" style="border:0; text-align:center">
+    <a href="#" class="site_title">
+      <div class="sidebar-logo">区块火眼标签库</div>
+    </a>
+  </div>
+  <div class="clearfix"></div>
+  <a class="profile clearfix" href="#">
+    <div class="profile_pic">
+      <img src="{% static 'images/default_avatar.png' %}" alt="..." class="img-circle profile_img" />
+    </div>
+    <div class="profile_info"><span>系统信息</span>
+      <h2>版本号：v3.2.1</h2>
+    </div>
+  </a>
+  <br />
+  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+      <ul class="nav side-menu">
+         <li>
+              <a>
+                <i class="fa fa-btc"></i>本地标签库管理<span class="fa fa-chevron-right pull-right"></span>
+              </a>
+              <ul class="nav child_menu">
+                 <li>
+                    <a href="{% url 'entity_list' %}">实体信息</a>
+                 </li>
+                 <li>
+                    <a href="{% url 'btc_group_list' %}">BTC组信息</a>
+                 </li>
+                 <li>
+                    <a href="{% url 'group_tag_list' %}">BTC组标签列表</a>
+                 </li>
+                 <li>
+                    <a href="{% url 'group_address_list' %}">BTC组地址列表</a>
+                 </li>
+                 <li>
+                    <a href="{% url 'get_tag_list' %}">地址标签列表</a>
+                 </li>
+                 <li>
+                    <a href="{% url 'address_list' %}">地址列表</a>
+                 </li>
+              </ul>
+         </li>
+         <li>
+              <a>
+                <i class="fa fa-btc"></i>数据导入导出<span class="fa fa-chevron-right pull-right"></span>
+              </a>
+              <ul class="nav child_menu">
+                 <li>
+                    <a href="{% url 'file_import' %}">Tag导入</a>
+                 </li>
+                 <li>
+                    <a href="{% url 'contract_import' %}">合约导入</a>
+                 </li>
+              </ul>
+         </li>
+         <li>
+              <a>
+                <i class="fa fa-btc"></i>远程标签库管理<span class="fa fa-chevron-right pull-right"></span>
+              </a>
+              <ul class="nav child_menu">
+                  <li>
+                      <a href="{% url 'create_btc_group' %}">创建BTC组</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'create_btc_tag' %}">创建BTC标签</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'rget_tags' %}">BTC全量标签列表</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'get_group_tag_by_addr' %}">BTC标签查找修改</a>
+                  </li>
+              </ul>
+         </li>
+         <li>
+              <a>
+                <i class="fa fa-btc"></i>错误日志管理<span class="fa fa-chevron-right pull-right"></span>
+              </a>
+              <ul class="nav child_menu">
+                  <li>
+                      <a href="{% url 'log_list' %}">错误日志</a>
+                  </li>
+              </ul>
+         </li>
+      </ul>
+    </div>
+  </div>
+</div>

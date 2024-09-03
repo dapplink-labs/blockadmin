@@ -1,0 +1,6 @@
+{% load staticfiles %}
+<div class="input-group">
+  <div class="input-group-addon"><span class="fa fa-btc"></span><span>地址(addr)</span>
+  </div>
+  <input type="text" style="width:300px" name="address" class="form-control" value="{{ address | default:'' }}" >
+</div>

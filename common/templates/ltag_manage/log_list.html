@@ -1,0 +1,56 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  ba_tags%}
+{% block bixin_head_title %}
+{% endblock %}
+{% block panelHeader %}
+<h3>录入错误日志</h3>
+{% endblock %}
+{% block filter %}
+    <form encType="multipart/form-data" class="form-inline d-flex flex-row justify-content-start align-items-end" method="get">
+        <div class="form-group">
+            {% include 'select/select_address_tag.html' %}
+        </div>
+        <button type="submit" class="btn btn-default">查询</button>
+    </form>
+{% endblock %}
+{% block content %}
+<div class="dataTables_wrapper form-inline no-footer">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered dataTable no-footer" role="grid">
+          <thead>
+            <tr role="row">
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">ID</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">gaddrid</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">tag</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">type</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">code</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">can_retry</th>
+              <th class="sorting" tabindex="0" rowspan="1" colSpan="1">brief</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for item in tag_log_list %}
+            <tr role="row">
+              <td>{{ item.id }}</td>
+              <td>{{ item.gaddrid }}</td>
+              <td>{{ item.tag  }}</td>
+              <td>{{ item.type  }}</td>
+              <td>{{ item.code }}</td>
+              <td>{{ item.can_retry }}</td>
+              <td>{{ item.brief }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="pull-right">
+      {% include 'select/pagination.html' with items=tag_log_list %}
+    </div>
+  </div>
+</div>
+{% endblock %}

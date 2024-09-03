@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<div class="input-group">
+  <div class="input-group-addon"><span class="fa fa-btc"></span><span>资产名称</span>
+  </div>
+  <select id="exchange_select" style="width:100px" name="asset" data-bixin-select="{'search':true}" class="form-control">
+    {% if asset_list == 'all' %}
+        <option value="all" selected>
+            全部
+        </option>
+    {% else %}
+        <option value="all">
+            全部
+        </option>
+    {% endif %}
+    {% for asset_name in asset_list %}
+        {% if asset_name == asset %}
+            <option value="{{ asset_name }}" selected>{{ asset_name }}</option>
+        {% else %}
+            <option value="{{ asset_name }}">{{ asset_name }}</option>
+        {% endif %}
+    {% endfor %}
+  </select>
+</div>

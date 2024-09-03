@@ -1,0 +1,65 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles ba_tags %}
+{% block panelHeader %}
+<h3>修改标签</h3>
+{% endblock %}
+{% block filter %}
+<ul class="nav navbar-right panel_toolbox">
+  <li>
+      <a href="{% url 'group_tag_list' %}">返回到标签组列表<i class="fa fa-chevron-right ml-1"></i></a>
+  </li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="form-horizontal form-label-left">
+    <form action="" method="post">
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">标签:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ group_tag_form.g_tag }}
+           </div>
+           {% if group_tag_form.g_tag.errors %}
+              <div class="text-danger">{{ group_tag_form.g_tag.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">风险级别:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ group_tag_form.g_threat_level }}
+           </div>
+           {% if group_tag_form.g_threat_level.errors %}
+              <div class="text-danger">{{ group_tag_form.g_threat_level.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">所属机构:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ group_tag_form.g_cate }}
+           </div>
+           {% if group_tag_form.g_cate.errors %}
+              <div class="text-danger">{{ group_tag_form.g_cate.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">实体选择:</label>
+           <input style="margin-left:10px" name="entity" value="" list="entities">
+           <datalist id="entities">
+              {% for entity in entity_list %}
+                <option value="{{ entity.name }}">
+              {% endfor %}
+           </datalist>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="submit" value="提交" />
+            </div>
+        </div>
+   </form>
+</div>
+
+{% endblock %}

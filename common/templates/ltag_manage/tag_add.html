@@ -1,0 +1,95 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles ba_tags %}
+{% block panelHeader %}
+<h3>添加新的标签</h3>
+{% endblock %}
+{% block filter %}
+<ul class="nav navbar-right panel_toolbox">
+  <li>
+      <a href="{% url 'get_tag_list' %}">返回到标签列表<i class="fa fa-chevron-right ml-1"></i></a>
+  </li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="form-horizontal form-label-left">
+    <form action="" method="post">
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">标签:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ block_form.tag }}
+           </div>
+           {% if block_form.tag.errors %}
+              <div class="text-danger">{{ block_form.tag.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">风险级别:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ block_form.threat_level }}
+           </div>
+           {% if block_form.threat_level.errors %}
+              <div class="text-danger">{{ block_form.threat_level.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">(Cate)所属机构:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ block_form.cate }}
+           </div>
+           {% if block_form.cate.errors %}
+              <div class="text-danger">{{ block_form.cate.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">BTC专有(tag_we):</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ block_form.tag_we }}
+           </div>
+           {% if block_form.tag_we.errors %}
+              <div class="text-danger">{{ block_form.tag_we.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">备注(comment):</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ block_form.comment }}
+           </div>
+           {% if block_form.comment.errors %}
+              <div class="text-danger">{{ block_form.comment.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">审核:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ block_form.is_commit }}
+           </div>
+           {% if block_form.is_commit.errors %}
+              <div class="text-danger">{{ block_form.is_commit.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">审核:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ block_form.is_checked }}
+           </div>
+           {% if block_form.is_checked.errors %}
+              <div class="text-danger">{{ block_form.is_checked.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="submit" value="提交" />
+            </div>
+        </div>
+   </form>
+</div>
+
+{% endblock %}

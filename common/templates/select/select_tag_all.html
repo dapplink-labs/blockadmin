@@ -1,0 +1,6 @@
+{% load staticfiles %}
+<div class="input-group">
+  <div class="input-group-addon"><span class="fa fa-btc"></span><span> 标签实际查找(tag_all)</span>
+  </div>
+  <input type="text" style="width:300px" name="tag_all" class="form-control" value="{{ tag_all | default:'' }}" >
+</div>

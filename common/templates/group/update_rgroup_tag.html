@@ -1,0 +1,80 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles ba_tags %}
+{% block panelHeader %}
+<h3>修改BTC的标签</h3>
+{% endblock %}
+{% block filter %}
+    {{ msg }}
+{% endblock %}
+{% block content %}
+<div class="form-horizontal form-label-left">
+    <form action="" method="post">
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">标签ID:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ upd_form.tag_id }}
+           </div>
+           {% if upd_form.tag_id.errors %}
+              <div class="text-danger">{{ upd_form.tag_id.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">标签名称:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ upd_form.tag_name }}
+           </div>
+           {% if upd_form.tag_name.errors %}
+              <div class="text-danger">{{ upd_form.tag_name.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">选择调证指数:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ upd_form.take_evidence_exp }}
+           </div>
+           {% if upd_form.take_evidence_exp.errors %}
+              <div class="text-danger">{{ upd_form.take_evidence_exp.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">选择风险等级:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ upd_form.threat_level }}
+           </div>
+           {% if upd_form.threat_level.errors %}
+              <div class="text-danger">{{ upd_form.threat_level.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">选择类别:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ upd_form.cate }}
+           </div>
+           {% if upd_form.cate.errors %}
+              <div class="text-danger">{{ upd_form.cate.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">备注:</label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {{ upd_form.comment }}
+           </div>
+           {% if upd_form.comment.errors %}
+              <div class="text-danger">{{ upd_form.comment.errors }}</div>
+           {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input style="width:80px; height:36px; text-align:center; margin-left:100px;" type="submit" value="提交" />
+            </div>
+        </div>
+   </form>
+</div>
+{% endblock %}

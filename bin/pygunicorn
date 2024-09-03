@@ -1,0 +1,4 @@
+#!/bin/bash
+
+. setup-env.sh
+exec gunicorn -c python:blockadmin.gunicorn_conf $*

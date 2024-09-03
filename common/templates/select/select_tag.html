@@ -1,0 +1,6 @@
+{% load staticfiles %}
+<div class="input-group">
+  <div class="input-group-addon"><span class="fa fa-btc"></span><span> 标签(tag)</span>
+  </div>
+  <input type="text" style="width:300px" name="tag" class="form-control" value="{{ tag | default:'' }}" >
+</div>
